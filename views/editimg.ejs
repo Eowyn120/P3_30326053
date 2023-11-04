@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Imagen</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 24px;
+            color: blue;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid blue;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <form action="/updateimg/<%= imagenes.id %>" method="post">
+            <input type="text" name="url" id="url" value="<%= imagenes.url %>" required maxlength="25" minlength="3">
+            <select name="destacado" id="destacado">
+                <option value="">--Seleccione--</option>
+                <option value="Si">Si</option>
+                <option value="No">NO</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Actualizar Imagen</button>
+        </form>
+    </div>
+</body>
+</html>

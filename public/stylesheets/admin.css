@@ -1,0 +1,72 @@
+
+
+h1{
+    display: block;
+    color: #4f4ceef6;
+    text-align: left;
+    padding: 14px 16px;
+    text-decoration:dotted;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
+}
+
+
+.caja{
+    border: 2px solid rgba(128, 128, 128, 0.297);
+    background-color: rgb(145, 142, 142);
+    padding: 10px;
+    width: 300px;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 150vh; /* Ajusta la altura según tus necesidades */
+    background-color: #24262b;
+
+  }
+  
+  .titulo {
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif; /* Ajusta el margen inferior según tus necesidades */
+  }
+
+  
+
+  .play{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: medium;
+  }
+
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  th {
+    background-color: #1f1c3e;
+  }
+  
+  tr {
+    background-color: #35325e;
+  }
+  
+
+  /* estilos.css */
+
+.imagen-producto {
+    width: 100px; /* Ajusta el ancho deseado */
+    height: 100px; /* Ajusta la altura deseada */
+    object-fit: cover; /* Ajusta cómo se ajusta la imagen dentro del contenedor */
+  }
