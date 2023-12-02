@@ -191,7 +191,7 @@ button:hover {
 	<form action="/aggimg" method="post" class="form">
 		<div class="form-control">
 			<label>Agrege la imagen</label>
-			<input type="text" name="url" id="url" placeholder="Ingrese la url de la imagen" required maxlength="25" minlength="3"/>
+			<input type="text" name="url" id="url" placeholder="Ingrese la url de la imagen" required maxlength="200" minlength="3"/>
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-exclamation-circle"></i>
 			<small>Error message</small>
@@ -203,7 +203,7 @@ button:hover {
 			<option value="No">NO</option>
 		</select>
 
-		<select name="producto" id="producto">
+		<select name="producto_id" id="producto_id">
 			<option value="" >--Seleccione--</option>
 			<% if (productos) { %>
 				<% for (let i = 0; i < productos.length; i++){  %>

@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark's Quest</title>
-    
+
     <link rel="stylesheet" href="/stylesheets/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 
     <style>
-        th {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            display:flexbox;
-            justify-content: center;
-            color: black;
-        }
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            font-family: 'Times New Roman', Times, serif;
-            color: white;
-        }
-        body{
-            background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Perspective-exterior-nobody-empty-box.jpg")
-        }
+
         
+
+
+        body {
+            background-color: #1ca39e;
+        }
+
         h1 {
             color: white;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #026f6e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: #025351;
         }
     </style>
 </head>
@@ -40,12 +48,12 @@
     <header>
 
         <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-    
-            <div class="caja">
-                <h1><strong>Mark's Quest</strong></h1>
+
+            <div>
+                <h1>Mark's Quest</h1>
             </div>
-    
-    
+
+        
             <div class="container-fluid">
                 <a class="navbar-brand" href="#"><strong>Pagina Reporte</strong></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -53,72 +61,108 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav nav justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link  btn btn-outline-primary" aria-current="page"
-                                href="/categorias">Categorias</a>
+                            <a class="nav-link  btn btn-dark" aria-current="page" href="/categorias">Categorias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary" href="/productos">Productos</a>
+                            <a class="nav-link btn btn-dark" href="/productos">Productos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-primary" href="/imagenes">Imagenes</a>
+                            <a class="nav-link btn btn-dark" href="/imagenes">Imagenes</a>
                         </li>
-    
+                        <a class="nav-link return-button" href="./">Salir</a>
                     </ul>
+
                 </div>
             </div>
         </nav>
-        </header>
-   
-   
-    <div class="container ">
-        <div class="titulo">
-            <h1>Mark's Quest <%= datos.length %></h1>
-        </div>
+    </header>
 
-    <div>
-        <table border="2">
-            <!-- <caption><h1>Reporte General</h1></caption> -->
-            <tr>
-                <th><p>N°</p></th>
-                <th><p>Codigo</p></th>
-                <th><p>Nombre</p></th>
-                <th><p>Precio</p></th>
-                <th><p>Marca</p></th>
-                <th><p>Jugadores</p></th>
-                <th><p>Descripcion</p></th>
-                <th><p>Categoria</p></th>
-                <th><p>Imagen</p></th>
-                <th><p>Destacado</p></th>
-            </tr>
-            <tr>
-               <% if (datos) { %>
-                    <% for (let i = 0; i < datos.length; i++){  %>
-                            <tr>
-                                <td><%= (i + 1) %></td>
-                                <td><%= datos[i].codigo %></td>
-                                <td><%= datos[i].productoNombre %></td>
-                                <td><%= datos[i].precio %></td>
-                                <td><%= datos[i].marca %></td>
-                                <td><%= datos[i].jugadores %></td>
-                                <td><%= datos[i].descripcion %></td>
-                                <td><%= datos[i].categoriaNombre %></td>
-                                <td><img class="imagen-producto" src="<%= datos[i].url %>"></td>
-                                <td><%= datos[i].destacado %></td>
-                            </tr>    
-                    <% } %>
-                <% } else { %>
+<div class="container">    
+    <div class="table-responsive">
+            <table border="2" class="table table-hover table-dark table-striped" >
+                <!-- <caption><h1>Reporte General</h1></caption> -->
+                <tr>
+                    <th>
+                        <p>N°</p>
+                    </th>
+                    <th>
+                        <p>Codigo</p>
+                    </th>
+                    <th>
+                        <p>Nombre</p>
+                    </th>
+                    <th>
+                        <p>Precio</p>
+                    </th>
+                    <th>
+                        <p>Marca</p>
+                    </th>
+                    <th>
+                        <p>Jugadores</p>
+                    </th>
+                    <th>
+                        <p>Descripcion</p>
+                    </th>
+                    <th>
+                        <p>Categoria</p>
+                    </th>
+                    <th>
+                        <p>Imagen</p>
+                    </th>
+                    <th>
+                        <p>Destacado</p>
+                    </th>
+                </tr>
+                <tr>
+                    <% if (datos) { %>
+                        <% for (let i=0; i < datos.length; i++){ %>
+                <tr>
+                    <td>
+                        <%= (i + 1) %>
+                    </td>
+                    <td>
+                        <%= datos[i].codigo %>
+                    </td>
+                    <td>
+                        <%= datos[i].productoNombre %>
+                    </td>
+                    <td>
+                        <%= datos[i].precio %>
+                    </td>
+                    <td>
+                        <%= datos[i].marca %>
+                    </td>
+                    <td>
+                        <%= datos[i].jugadores %>
+                    </td>
+                    <td>
+                        <%= datos[i].descripcion %>
+                    </td>
+                    <td>
+                        <%= datos[i].categoriaNombre %>
+                    </td>
+                    <td><img class="imagen-producto" src="<%= datos[i].url %>"></td>
+                    <td>
+                        <%= datos[i].destacado %>
+                    </td>
+                </tr>
+                <% } %>
+                    <% } else { %>
                         <tr>
-                            <th><p>No hay productos en el sistema</p></th>
+                            <th>
+                                <p>No hay productos en el sistema</p>
+                            </th>
                         </tr>
-                    <% }   %>
-            </tr>
-        </table>
+                        <% } %>
+                            </tr>
+            </table>
     </div>
 </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
@@ -126,4 +170,5 @@
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

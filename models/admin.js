@@ -2,7 +2,7 @@ const db = require ('../database/conection');
 
 module.exports = {
     //Hace el reporte de las 3 tablas (categorias, productos e imagenes)
-    obtener() {
+    obteneradmin() {
         return new Promise ((resolve, reject) =>{
             const sql = 'SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id';
             db.all (sql, (err, resultados) =>{
@@ -12,6 +12,56 @@ module.exports = {
                     resolve (resultados)};
             });
         });
+    },
+    //Busqueda usuarios por nombre
+    obtenerprdPorNombre(nombre){
+        return new Promise ((resolve, reject)=>{
+            const sql = 'SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id WHERE productos.nombre = ?'
+            db.all(sql, [nombre], (err, resultados)=>{
+                if (err) reject(err);
+                else resolve(resultados);
+            })
+        })
+    },
+    //Busqueda usuarios por descripcion
+    obtenerprdPorDescripcion(descripcion){
+        return new Promise ((resolve, reject)=>{
+            const sql = 'SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id WHERE productos.descripcion = ?'
+            db.all(sql, [descripcion], (err, resultados)=>{
+                if (err) reject(err);
+                else resolve(resultados);
+            })
+        })
+    },
+    //Filtrado categoria
+    filtradoctg(categoria){
+        return new Promise ((resolve, reject)=>{
+            const sql='SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id WHERE categorias.nombre = ?'
+            db.all(sql, [categoria], (err, resultados)=>{
+                if (err) reject(err);
+                else resolve(resultados);
+            })
+        })
+    },
+    //Filtrado marca
+    filtradomarca(marca){
+        return new Promise ((resolve, reject)=>{
+            const sql='SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id WHERE productos.marca = ?'
+            db.all(sql, [marca], (err, resultados)=>{
+                if (err) reject(err);
+                else resolve(resultados);
+            })
+        })
+    },
+    //Filtrado jugadores
+    filtradojgd(jugadores){
+        return new Promise ((resolve, reject)=>{
+            const sql='SELECT productos.nombre AS productoNombre, productos.precio, productos.codigo, productos.descripcion, productos.marca, productos.jugadores, categorias.nombre AS categoriaNombre, imagenes.url, imagenes.destacado FROM productos INNER JOIN categorias ON productos.categoria_id = categorias.id INNER JOIN imagenes ON productos.id = imagenes.producto_id WHERE productos.jugadores = ?'
+            db.all(sql, [jugadores], (err, resultados)=>{
+                if (err) reject(err);
+                else resolve(resultados);
+            })
+        })
     },
     //Obtiene solamente la tabla de categorias
     obtenerctg(){
@@ -141,7 +191,9 @@ module.exports = {
             const sql = 'INSERT INTO imagenes (url, destacado, producto_id) VALUES (?, ?, ?)';
             db.run (sql, [url, destacado, producto_id], (err, resultados) =>{
                 if (err) reject(err);
-                else resolve(resultados);
+                else {
+                    console.log(JSON.stringify(resultados, null, 4));
+                    resolve(resultados)};
             });
         });
     },

@@ -1,0 +1,36 @@
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .cuadricula {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+  .lista .imagen-producto {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .lista .nombre-producto {
+    font-size: 2rem;
+  }
+  
+  .lista .precio {
+    font-size: 1.5rem;
+    color: red;
+  }
+  
+  .cuadricula .imagen-producto {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .cuadricula .nombre-producto {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  

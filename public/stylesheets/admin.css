@@ -11,56 +11,28 @@ h1{
 }
 
 
-.caja{
-    border: 2px solid rgba(128, 128, 128, 0.297);
-    background-color: rgb(145, 142, 142);
-    padding: 10px;
-    width: 300px;
-}
 
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 150vh; /* Ajusta la altura según tus necesidades */
-    background-color: #24262b;
-
-  }
   
   .titulo {
+    display: flexbox;
     margin-bottom: 20px;
     font-family: 'Times New Roman', Times, serif; /* Ajusta el margen inferior según tus necesidades */
   }
 
   
 
-  .play{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: medium;
-  }
+
 
 
 
   table {
     width: 100%;
     border-collapse: collapse;
+    display: flexbox;
   }
   
-  th, td {
-    padding: 10px;
-    text-align: left;
-    font-family: 'Times New Roman', Times, serif;
-  }
+
   
-  th {
-    background-color: #1f1c3e;
-  }
-  
-  tr {
-    background-color: #35325e;
-  }
   
 
   /* estilos.css */
@@ -70,3 +42,89 @@ h1{
     height: 100px; /* Ajusta la altura deseada */
     object-fit: cover; /* Ajusta cómo se ajusta la imagen dentro del contenedor */
   }
+
+
+  
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:stretch;
+    height: 100%; /* Ajusta la altura según tus necesidades */
+    background-color: #24262b;
+    padding: 5%;
+  }
+
+  @media screen and (max-width: 50rem) {
+    .container {
+        max-width: 80%;
+        flex-direction: column;
+        margin-inline: 0;
+    }
+
+    .image-section,
+    .form-section {
+        width: 100%;
+    }
+
+    .image-section {
+        height: 25vh;
+    }
+
+    .content-container {
+        inset: 0;
+        transform: translate(0, 0);
+        padding: 1rem 1.6rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-container h1 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-container p {
+        font-size: 0.75rem;
+    }
+
+    .form-section {
+        flex: 1;
+        padding: 1rem 1rem;
+    }
+
+    .logo-container {
+        margin-bottom: 1rem;
+    }
+
+    .form-wrapper>h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-wrapper>p {
+        margin-bottom: 1rem;
+    }
+
+    .form-wrapper button {
+        font-size: 0.875rem;
+    }
+
+    .or-divider {
+        font-weight: 500;
+        margin-block: 0.6rem;
+    }
+}
+
+@media screen and (max-width: 36.25rem) {
+    .container {
+        max-width: 100%;
+    }
+
+    .form-wrapper {
+        width: 100%;
+    }
+}

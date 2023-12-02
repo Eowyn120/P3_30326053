@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <title>Inicio de Sesion</title>
+    <style>
+        body {
+            background-color: #1ca39e;
+        }
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #026f6e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: #025351;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="nav-link return-button" href="./">Devolver</a>
+    </header>
+    <form class="container" name="formulario" action="/login" method="post">
+
+        <div class="image-section">
+            <div class="image-wrapper">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Perspective-exterior-nobody-empty-box.jpg"
+                    alt="img">
+            </div>
+
+            <div class="content-container">
+                <h1 class="section-heading"><span>Presentación</span></h1>
+                <p class="section-paragraph">Mark García <span>C.I.30.326.053 </span> Sección 4 </p>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="form-wrapper">
+                <div class="logo-container">
+                    <a href="#" class="logo-container">
+                        <img src="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" alt="Logo">
+                    </a>
+                </div>
+
+                <h2 aling="top">Mark's Quest</h2>
+                <p>Ingrese sus datos.</p>
+
+                <div class="input-container">
+                    <div class="form-group">
+                        <label for="email">Usuario</label>
+                        <input type="email" name="user" id="user" maxlength="20"
+                            placeholder="Ingrese su usuario/correo electronico" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" maxlength="10"
+                            placeholder="Ingrese la Contraseña" required>
+                    </div>
+                </div>
+
+
+                <input class="login-btn" type="submit" value="Iniciar Sesión"></input>
+
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

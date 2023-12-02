@@ -59,7 +59,7 @@
 <body>
     <div class="container">
         <form action="/updateimg/<%= imagenes.id %>" method="post">
-            <input type="text" name="url" id="url" value="<%= imagenes.url %>" required maxlength="25" minlength="3">
+            <input type="text" name="url" id="url" value="<%= imagenes.url %>" required maxlength="250" minlength="3">
             <select name="destacado" id="destacado">
                 <option value="">--Seleccione--</option>
                 <option value="Si">Si</option>

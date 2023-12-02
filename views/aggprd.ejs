@@ -200,12 +200,18 @@ button:hover {
                 <small>Error message</small>
             </div>
             <div class="form-control">
+                <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del producto" required/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
                 <input type="number" name="jugadores" id="jugadores" placeholder="Ingrese para cuantos jugadores es el producto" required/>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
-            <select name="categoria" id="categoria">
+            <select name="categoria_id" id="categoria_id">
                 <option value="" >--Seleccione--</option>
                 <% if (categorias) { %>
                     <% for (let i = 0; i < categorias.length; i++){  %>

@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 console.log(process.env.USER);
 console.log(process.env.PASSWORD);
@@ -41,6 +42,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.use(session({
+  secret: process.env.PASSWORD,
+  resave: false,
+  saveUninitialized: false
+}));
 
 module.exports = app;
 
