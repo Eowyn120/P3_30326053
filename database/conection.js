@@ -38,6 +38,31 @@ db.run(sql_create3, err =>{
     console.log("Anexada de la tabla imagenes exitosa!!!");
   }
 });
+const sql_create4="CREATE TABLE IF NOT EXISTS clientes (id INTEGER PRIMARY KEY AUTOINCREMENT, email VARCHAR (30) NOT NULL, password VARCHAR (16) NOT NULL, preg_seg varchar (16) NOT NULL, resp_seg varchar (8) NOT NULL)";
+db.run(sql_create4, err =>{
+  if (err){
+    console.error(err.message);
+  } else{
+    console.log("Anexada de la tabla clientes exitosa!!!");
+  }
+});
+const sql_create5 = "CREATE TABLE IF NOT EXISTS monedas (id INTEGER PRIMARY KEY AUTOINCREMENT, nomenclatura VARCHAR (6) NOT NULL, descripcion VARCHAR (30) NOT NULL)";
+db.run(sql_create5, err =>{
+  if (err){
+    console.error(err.message);
+  } else{
+    console.log("Anexada de la tabla de monedas exitosa!!!");
+  }
+});
+
+const sql_create6="CREATE TABLE IF NOT EXISTS compras (id INTEGER PRIMARY KEY AUTOINCREMENT, cantidad INTEGER NOT NULL, total_pagado double NOT NULL, fecha DATETIME NOT NULL, ip_cliente varchar (18) NOT NULL, transaccion_id varchar (40) NOT NULL, descripcion varchar (100) NOT NULL, referencia varchar (50) NOT NULL, moneda_id INTEGER, cliente_id INTEGER, producto_id INTEGER,FOREIGN KEY (cliente_id) REFERENCES monedas (id), FOREIGN KEY (cliente_id) REFERENCES clientes (id), FOREIGN KEY (producto_id) REFERENCES productos (id))";
+db.run(sql_create6, err =>{
+  if(err){
+    console.error(err.message);
+  } else{
+    console.log("Anexada de la tabla compras exitosa!!!");
+  }
+});
 })
 
 module.exports = db;
