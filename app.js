@@ -34,6 +34,7 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.set('trust proxy', true);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
