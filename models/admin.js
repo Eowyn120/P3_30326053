@@ -11,6 +11,18 @@ module.exports = {
             });
         });
     },
+    //Inicio de sesion clientes
+    iniciosesionclientes(email){
+        return new Promise ((resolve, reject)=>{
+            const sql= 'SELECT id, password FROM clientes WHERE email = ?';
+            db.all(sql, [email], ((err, resultados)=>{
+                if (err) reject (err);
+                else{ 
+                    console.log(JSON.stringify(resultados, null, 4));
+                    resolve (resultados);}
+            }))
+        })
+    },
     //Validar respuesta y pregunta de seguridad para la contraseña
     recuperarclave(pregunta, respuesta){
         return new Promise ((resolve, reject)=>{
@@ -18,6 +30,7 @@ module.exports = {
             db.get (sql, [pregunta, respuesta], (err, resultados)=>{
                 if (err) reject(err);
                 else {
+                    console.log(JSON.stringify(resultados, null, 4));
                     resolve (resultados)};
             })
         })
@@ -31,6 +44,26 @@ module.exports = {
                 else resolve (resultados);
             });
         })
+    },
+    //Muestra las compras realizadas por los clientes
+    obtenerfacturas(){
+        return new Promise ((resolve, reject)=>{
+            const sql = 'SELECT compras.cantidad, compras.total_pagado, compras.fecha, compras.ip_cliente, compras.transaccion_id, compras.descripcion, compras.referencia, monedas.nomenclatura, clientes.email, productos.nombre FROM compras INNER JOIN monedas ON compras.moneda_id = monedas.id INNER JOIN clientes ON compras.cliente_id = clientes.id INNER JOIN productos ON compras.producto_id = productos.id';
+            db.all(sql, (err,resultados)=>{
+                if (err) reject (err);
+                else resolve (resultados);
+            });
+        });
+    },
+    //Muestra los clientes registrados en el sistema
+    obtenerclientes(){
+        return new Promise ((resolve, reject)=>{
+            const sql = 'SELECT * FROM clientes';
+            db.all(sql, (err, resultados)=>{
+                if (err) reject(err);
+                else resolve (resultados);
+            });
+        });
     },
     //Hace el reporte de las 3 tablas (categorias, productos e imagenes)
     obteneradmin() {

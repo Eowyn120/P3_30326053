@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturas</title>
+
+    <link rel="stylesheet" href="/public/stylesheets/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        .titulo h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th,
+        tr {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            display: flexbox;
+            justify-content: center;
+            color: white;
+            background-color: #160d18;
+        }
+
+        td {
+
+            text-align: left;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: left;
+            padding: 8px;
+            color: white;
+        }
+
+        body {
+            background-color: #1ca39e;
+        }
+
+
+        h1 {
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #026f6e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: #025351;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+
+            <div>
+                <h1>Mark's Quest</h1>
+            </div>
+
+
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark" href="/report">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  btn btn-dark" aria-current="page" href="/categorias">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark" href="/productos">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark" href="/imagenes">Imagenes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark" href="/tablaclientes">clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-dark" href="/tablacompras">Facturas</a>
+                        </li>
+                        <a class="nav-link return-button" href="/logout">Salir</a>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<div class="container">
+    <div class="table-responsive">
+        <div class="titulo">
+            <h1>Pagina Facturas
+            </h1>
+        </div>
+            <table border="2px" class="table table-hover table-dark table-striped">
+                <!-- <caption>Productos</caption> -->
+                <tr>
+                    <th>
+                        <p>N°</p>
+                    </th>
+                    <th>
+                        <p>Producto</p>
+                    </th>
+                    <th>
+                        <p>Referencia</p>
+                    </th>
+                    <th>
+                        <p>Cantidad</p>
+                    </th>
+                    <th>
+                        <p>Total Pagado</p>
+                    </th>
+                    <th>
+                        <p>Moneda</p>
+                    </th>
+                    <th>
+                        <p>N° de Transacción</p>
+                    </th>
+                    <th>
+                        <p>Fecha</p>
+                    </th>
+                    <th>
+                        <p>Cliente</p>
+                    </th>
+                    <th>
+                        <p>Direccion IP</p>
+                    </th>
+                </tr>
+                <tr>
+                    <% if (facturas) { %>
+                        <% for (let i=0; i < facturas.length; i++){ %>
+                            <% if (facturas) { %>
+                <tr>
+                    <td>
+                        <%= (i + 1) %>
+                    </td>
+                    <td>
+                        <%= facturas[i].nombre %>
+                    </td>
+                    <td>
+                        <%= facturas[i].referencia %>
+                    </td>
+                    <td>
+                        <%= facturas[i].cantidad %>
+                    </td>
+                    <td>
+                        <%= facturas[i].total_pagado %>
+                    </td>
+                    <td>
+                        <%= facturas[i].nomenclatura %>
+                    </td>
+                    <td>
+                        <%= facturas[i].transaccion_id %>
+                    </td>
+                    <td>
+                        <%= facturas[i].fecha %>
+                    </td>
+                    <td>
+                        <%= facturas[i].email %>
+                    </td>
+                    <td>
+                        <%= facturas[i].ip_cliente %>
+                    </td>
+                </tr>
+                <% } %>
+                    <% } %>
+                        <% } else { %> 
+                            <tr>
+                                <th>No hay compras en el sistema</th>
+                            </tr>
+                            <% } %>
+                                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

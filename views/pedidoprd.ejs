@@ -77,12 +77,15 @@
         <form action="/payments" method="post">
             <label for="descripcion">Tipo de transacción</label>
             <input type="text" name="descripcion" id="descripcion" value="Compra de: <%= datos.productoNombre %>" readonly>
+            <input type="text" name="producto_id" id="producto_id" value="<%= datos.id %>" readonly>
             <label for="nombre">Nombre del comprador</label>
             <input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre completo" required>
             <label for="numero_tarjeta">Número de Tarjeta de Credito</label>
             <input type="password" name="numero_tarjeta" id="numero_tarjeta" placeholder="Ingrese su numeor de tarjeta de credito" maxlength="16" minlength="14" required>
             <label for="cvv">Código de Seguridad</label>
             <input type="password" name="cvv" id="cvv" placeholder="Ingrese el codigo de seguridad de la tarjeta de credito" maxlength="3" required><br>
+            <label for="referencia">Haga una referencia</label>
+            <input type="text" name="referencia" id="referencia" value="Marca: <%= datos.marca %>" readonly>
             <label for="mes_ven">Mes de Vencimiento de la tarjeta</label>
             <select name="mes_ven" id="mes_ven">
                 <option value="1">Enero</option>

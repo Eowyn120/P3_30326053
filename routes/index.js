@@ -22,6 +22,30 @@ router.get('/loginclientes', function(req, res, next){
   res.render('login_clientes', {title: 'Login Clientes'})}
 });
 
+//logeo de inicio de sesion cliente
+router.post('/login2', function(req, res, next){
+  const {email, password} =req.body;
+  let concat, concat2;
+  productosModel
+  .iniciosesionclientes(email)
+  .then(datos=>{
+    concat = datos[0].password;
+    concat2 = datos[0].id
+    console.log(concat2);
+    if (password == concat){
+      req.session.auth = true;
+      req.session.username = concat2;
+      res.redirect('/clientes');
+    }else{
+      res.send('esto no funciona')
+    }
+  })
+  .catch(err=>{
+    console.error(err.message);
+    return res.status(500).send('Error en el inicio de sesion')
+  })
+});
+
 //Pagina registros clientes
 router.get('/register-pag', function(req, res, next){
   res.render('register_clientes', {title: 'Registro Clientes'})
@@ -36,7 +60,11 @@ router.post('/register', function(req, res, next){
   productosModel
     .registroclientes(email, password1, preg_seg, resp_seg)
     .then(idClienteRegistrado=>{
-      res.redirect('/clientes')
+      res.redirect('/loginclientes')
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error en el registro')
     })}
 });
 
@@ -95,7 +123,7 @@ router.get('/detalles/:id', function(req, res, next){
 //Pagina formulario de compra 
 router.get('/pedidoprd/:id', function(req, res, next){
   if(req.session.auth){
-    const id = req.params.id
+    const id = req.params.id;
     productosModel
       .obtenerPorId(id)
       .then(datos=>{
@@ -113,8 +141,9 @@ router.get('/pedidoprd/:id', function(req, res, next){
 //Pago productos API 
 router.post('/payments', async (req, res, next)=>{
   var monto, moneda;
-  const {descripcion, nombre, numero_tarjeta, cvv, mes_ven, year_ven, moneda_id, cantidad, referencia, precio} = req.body;
+  const {producto_id, descripcion, nombre, numero_tarjeta, cvv, mes_ven, year_ven, moneda_id, cantidad, referencia, precio} = req.body;
   const ip_cliente = req.socket.remoteAddress;
+  const cliente_id = req.session.username;
   if (moneda_id == 1) {
     moneda= 'USD';
     monto = cantidad * precio;
@@ -155,7 +184,6 @@ router.post('/payments', async (req, res, next)=>{
       .then(idFacturaRealizada =>{
         res.render('pagosuccess', {title: 'Compra Exitosa'})
       })
-      
   } catch (err) {
     res.render('pagofails');
   }
@@ -596,6 +624,40 @@ router.get('/deleteimg/:id', function(req,res,next){
     console.error(err.message);
     return res.status(500).send('Error elimando la imagen')
   })
+});
+
+//Vista tabla de compras
+router.get('/tablacompras', function(req, res, next){
+  if (req.session.auth){
+    productosModel
+    .obtenerfacturas()
+    .then(facturas=>{
+      res.render('tablacompras', {facturas: facturas})
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error cargando las facturas')
+    })
+  } else{
+    res.redirect('/admin')
+  }
+});
+
+//Vista tabla de clientes
+router.get('/tablaclientes', function(req, res, next){
+  if (req.session.auth){
+    productosModel
+    .obtenerclientes()
+    .then(clientes=>{
+      res.render('tablaclientes', {clientes: clientes})
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error cargando los clientes')
+    })
+  } else{
+    res.redirect('/admin')
+  }
 });
 
 //Cerrar sesion
