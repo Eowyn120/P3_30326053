@@ -30,7 +30,6 @@ module.exports = {
             db.get (sql, [pregunta, respuesta], (err, resultados)=>{
                 if (err) reject(err);
                 else {
-                    console.log(JSON.stringify(resultados, null, 4));
                     resolve (resultados)};
             })
         })

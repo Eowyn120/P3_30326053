@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Imagen</title>
+        <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
 
     <style>
         body {
@@ -21,13 +27,6 @@
             border: 2px solid blue;
             border-radius: 5px;
             text-align: center;
-        }
-
-        h3 {
-            margin-top: 0;
-            font-size: 24px;
-            color: blue;
-            font-weight: bold;
         }
 
         img {
@@ -48,22 +47,55 @@
         button:hover {
             background-color: darkblue;
         }
-        h4 {
-            border: 2px solid blue;
+
+        h4,
+        h3 {
             border-radius: 5px;
             padding: 10px;
             margin: 10px 0;
         }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: darkblue;
+        }
     </style>
 </head>
+
 <body>
-    <div  class="container">
-        <h3><span style="background-color: whitesmoke;">¿Está seguro de eliminar esta Imagen?</span></h3>
+    <div class="container">
+        <div>
+            <a class="nav-link return-button" href="/logout">Salir.</a>
+        </div>
+
+        <div class="header">
+        <h2>¿Está seguro de eliminar esta Imagen?</h2>
+        </div>
+        <hr>
         <form action="/deleteimg/<%= imagenes.id %>" method="get">
-            <img src="<%= imagenes.url %>">
-            <h4><%= imagenes.destacado %></h4>
-            <button type="submit" class="btn btn-primary">Eliminar Imagen</button>
+            <div style="margin-top: 10px; margin-bottom: 10px;"><img src="<%= imagenes.url %>"></div>
+            <div style="margin-top: 10px; margin-bottom: 10px;">
+                <h4>
+                    <%= imagenes.destacado %>
+                </h4>
+            </div>
+            <hr>
+            <div style="margin-top: 10px; margin-bottom: 10px;"><button type="submit" class="btn btn-primary">Eliminar
+                    Imagen</button></div>
         </form>
     </div>
 </body>
+
 </html>

@@ -1,43 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <title>Registro Clientes</title>
+    <title>Mark's Quest</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- 
+    - favicon
+  -->
+    <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
+    <!-- 
+    - google font link
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #161737;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        h4,
+        h3,
+        h2 {
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: darkblue;
+        }
+
+        .adjust {
+            max-width: 90%;
+            height: 90%;
+            overflow: auto;
+        }
+    </style>
+
 </head>
+
 <body>
-    <form action="/register" method="post">
-        <div>
+    <div class="adjust">
+        <div class="container">
             <div>
-                <label for="email">Ingrese el correo</label>
-                <input type="email" name="email" id="email" maxlength="30" minlength="8" placeholder="Ingrese su correo electronico" required>
+                <a class="nav-link return-button" href="/loginclientes">Salir.</a>
             </div>
-            <div>
-                <label for="password">Ingrese su contraseña</label>
-                <input type="password" name="password1" id="password1" maxlength="16" minlength="8" placeholder="Ingrese su contraseña" required>
+
+            <div class="header">
+                <h2>Registro</h2>
             </div>
-            <div>
-                <label for="password2">Confirme su contraseña</label>
-                <input type="password" name="password2" id="password2" maxlength="16" minlength="8" placeholder="Confirme su contraseña" required>
+            <hr>
+            <form action="/register" method="post">
+
+                <h4 for="email">Ingrese el correo</h4>
+                <input type="email" name="email" id="email" maxlength="30" minlength="8"
+                    placeholder="Ingrese su correo electronico" required>
+
+                <hr>
+                <h4 for="password">Ingrese su contraseña</h4>
+                <input type="password" name="password1" id="password1" maxlength="16" minlength="8"
+                    placeholder="Ingrese su contraseña" required>
+
+                <hr>
+                <h4 for="password2">Confirme su contraseña</h4>
+                <input type="password" name="password2" id="password2" maxlength="16" minlength="8"
+                    placeholder="Confirme su contraseña" required>
+
+                <hr>
+                <h4 for="preg_seg">Ingrese su pregunta de seguridad</h4>
+                <input type="text" name="preg_seg" id="preg_seg" maxlength="16" minlength="6"
+                    placeholder="Ingrese su pregunta de seguridad" required>
+                <hr>
+                <h4 for="resp_seg">Ingrese su respuesta de seguiridad</h4>
+                <input type="text" name="resp_seg" id="resp_seg" maxlength="8" minlength="4"
+                    placeholder="Ingrese su respuesta de seguridad" required>
+                <hr><div>
+                <div class="g-recaptcha" data-sitekey="6LdAuUopAAAAALdjW_mvoUQ2Zoe6-XC5CifuJxup"></div>
             </div>
-            <div>
-                <label for="preg_seg">Ingrese su pregunta de seguridad</label>
-                <input type="text" name="preg_seg" id="preg_seg" maxlength="16" minlength="6" placeholder="Ingrese su pregunta de seguridad" required>
-            </div>            
-            <div>
-                <label for="resp_seg">Ingrese su respuseta de seguiridad</label>
-                <input type="text" name="resp_seg" id="resp_seg" maxlength="8" minlength="4" placeholder="Ingrese su respuesta de seguridad" required>
-            </div>
-            <div class="g-recaptcha" data-sitekey="6LdAuUopAAAAALdjW_mvoUQ2Zoe6-XC5CifuJxup"></div>
-            <br/>
-            <input class="btn btn-primary" type="submit" value="Registrate">
-            
+
+
+                <hr>
+                <div style="margin-top: 10px; margin-bottom: 10px;"><input class="btn btn-primary" type="submit"
+                        value="Registrate"></div>
+
+            </form>
         </div>
-    </form>
-
-
+    </div>
 </body>
+
 </html>

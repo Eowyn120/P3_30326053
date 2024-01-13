@@ -4,54 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Mark's Quest</title>
 
-    <link rel="stylesheet" href="/public/stylesheets/admin.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/hf.css">
+
+    <!-- 
+    - favicon
+  -->
+    <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
+    <!-- 
+    - google font link
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
+        rel="stylesheet">
+
 
     <style>
-        .titulo h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
-
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th,
-        tr {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            display: flexbox;
-            justify-content: center;
-            color: white;
-            background-color: #160d18;
-        }
-
-        td {
-
-            text-align: left;
-            font-family: 'Times New Roman', Times, serif;
-            text-align: left;
-            padding: 8px;
-            color: white;
-        }
-
         body {
-            background-color: #1ca39e;
-        }
-
-
-        h1 {
-            color: white;
-            font-family: 'Times New Roman', Times, serif;
+            background-color: #161737;
         }
 
         .return-button {
@@ -59,7 +36,7 @@
             top: 20px;
             right: 20px;
             padding: 10px 20px;
-            background-color: #026f6e;
+            background-color: blue;
             color: white;
             border: none;
             border-radius: 4px;
@@ -68,128 +45,176 @@
         }
 
         .return-button:hover {
-            background-color: #025351;
+            background-color: darkblue;
         }
-
     </style>
 </head>
 
 <body>
-    <header>
+    <div class="color">
+        <header>
+            <div class="container1">
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                <h1 class="h1 logo">
+                    <a href="/report">Mark's Quest<span>.</span></a>
+                </h1>
 
-            <div>
-                <h1>Mark's Quest</h1>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                            <ul class="navbar-nav nav justify-content-center">
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/report">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  btn btn-dark" aria-current="page"
+                                        href="/categorias">Categorias</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/productos">Productos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/imagenes">Imagenes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/tablaclientes">Clientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/tablacompras">Facturas</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link return-button" href="/logout">Salir.</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+
             </div>
+        </header>
+    </div>
 
-
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav nav justify-content-center">
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-dark" href="/report">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  btn btn-dark" aria-current="page" href="/categorias">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-dark" href="/productos">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-dark" href="/imagenes">Imagenes</a>
-                        </li>
-                        <a class="nav-link return-button" href="/logout">Salir</a>
-                    </ul>
-
+    <main class="separe">
+        <article class="container1">
+            <div class="container">
+                <div class="table-responsive">
+                    <div class="titulo">
+                        <h1>Pagina Productos
+                        </h1>
+                    </div>
+                    <table border="2px" class="table table-hover table-dark table-striped">
+                        <!-- <caption>Productos</caption> -->
+                        <tr>
+                            <th>
+                                <p>N°</p>
+                            </th>
+                            <th>
+                                <p>Codigo</p>
+                            </th>
+                            <th>
+                                <p>Nombre</p>
+                            </th>
+                            <th>
+                                <p>Precio</p>
+                            </th>
+                            <th>
+                                <p>Marca</p>
+                            </th>
+                            <th>
+                                <p>Jugadores</p>
+                            </th>
+                            <th>
+                                <p>Descripcion</p>
+                            </th>
+                            <td>
+                                <div class="input-group"><a type="button" class="btn btn-dark"
+                                        href="/prdagg">Agregar</a></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <% if (productos) { %>
+                                <% for (let i=0; i < productos.length; i++){ %>
+                                    <% if (productos) { %>
+                        <tr>
+                            <td>
+                                <%= (i + 1) %>
+                            </td>
+                            <td>
+                                <%= productos[i].codigo %>
+                            </td>
+                            <td>
+                                <%= productos[i].nombre %>
+                            </td>
+                            <td>
+                                <%= productos[i].precio %>
+                            </td>
+                            <td>
+                                <%= productos[i].marca %>
+                            </td>
+                            <td>
+                                <%= productos[i].jugadores %>
+                            </td>
+                            <td>
+                                <%= productos[i].descripcion %>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <a href="/prddelete/<%= productos[i].id%>" type="button"
+                                        class="btn btn-dark  btnsepare">Eliminar</a>
+                                    <a href="/prdedit/<%= productos[i].id%>" type="button"
+                                        class="btn btn-dark ">Actualizar</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <% } %>
+                            <% } %>
+                                <% } else { %>
+                                    <tr>
+                                        <th>No hay productos en el sistema</th>
+                                    </tr>
+                                    <% } %>
+                                        </tr>
+                    </table>
                 </div>
             </div>
-        </nav>
-    </header>
+        </article>
+    </main>
+    <!-- 
+- #FOOTER
+-->
 
-<div class="container">
-    <div class="table-responsive">
-        <div class="titulo">
-            <h1>Pagina Productos
-            </h1>
+    <footer class="footer">
+        <div class="container1">
+
+            <p class="h1 logo">
+                <a href="#">
+                    Mark's Quest<span>.</span>
+                </a>
+            </p>
+
+            <p class="copyright">
+                &copy; 2024 <a href="#">M&C</a>. All rights reserved
+            </p>
+
         </div>
-            <table border="2px" class="table table-hover table-dark table-striped">
-                <!-- <caption>Productos</caption> -->
-                <tr>
-                    <th>
-                        <p>N°</p>
-                    </th>
-                    <th>
-                        <p>Codigo</p>
-                    </th>
-                    <th>
-                        <p>Nombre</p>
-                    </th>
-                    <th>
-                        <p>Precio</p>
-                    </th>
-                    <th>
-                        <p>Marca</p>
-                    </th>
-                    <th>
-                        <p>Jugadores</p>
-                    </th>
-                    <th>
-                        <p>Descripcion</p>
-                    </th>
-                    <td>
-                        <div class="input-group"><a type="button" class="btn btn-dark" href="/prdagg">Agregar</a></div>
-                    </td>
-                </tr>
-                <tr>
-                    <% if (productos) { %>
-                        <% for (let i=0; i < productos.length; i++){ %>
-                            <% if (productos) { %>
-                <tr>
-                    <td>
-                        <%= (i + 1) %>
-                    </td>
-                    <td>
-                        <%= productos[i].codigo %>
-                    </td>
-                    <td>
-                        <%= productos[i].nombre %>
-                    </td>
-                    <td>
-                        <%= productos[i].precio %>
-                    </td>
-                    <td>
-                        <%= productos[i].marca %>
-                    </td>
-                    <td>
-                        <%= productos[i].jugadores %>
-                    </td>
-                    <td>
-                        <%= productos[i].descripcion %>
-                    </td>
-                    <td>
-                        <div class="input-group">
-                            <a href="/prddelete/<%= productos[i].id%>" type="button" class="btn btn-dark">Eliminar</a>
-                            <a href="/prdedit/<%= productos[i].id%>" type="button" class="btn btn-dark">Actualizar</a>
-                        </div>
-                    </td>
-                </tr>
-                <% } %>
-                    <% } %>
-                        <% } else { %>
-                            <tr>
-                                <th>No hay productos en el sistema</th>
-                            </tr>
-                            <% } %>
-                                </tr>
-            </table>
-        </div>
-    </div>
+    </footer>
+
+
+
+
+
+    <!-- 
+- ionicon link
+-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

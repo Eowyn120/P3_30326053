@@ -1,234 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Producto</title>
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+        <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
 
-* {
-	box-sizing: border-box;
-}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
 
-body {
-	background-color: #8eaeeb;
-	font-family: 'Open Sans', sans-serif;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
-	margin: 0;
-}
+        * {
+            box-sizing: border-box;
+        }
 
-.container {
-	background-color: #fff;
-	border-radius: 5px;
-	box-shadow: 0 2px 20px 0px #03153b2e;
-	overflow: hidden;
-	width: 400px;
-	max-width: 100%;
-}
+        body {
+            background-color: #8eaeeb;
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
 
-.header {
-	border-bottom: 1px solid #f0f0f0;
-	background-color: #ccd8ef;
-	padding: 20px 40px;
-}
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 20px 0px #03153b2e;
+            overflow: hidden;
+            width: 400px;
+            max-width: 100%;
+        }
 
-.header h2 {
-	margin: 0;
-	color: #212C42;
-}
+        .header {
+            border-bottom: 1px solid #f0f0f0;
+            background-color: #ccd8ef;
+            padding: 20px 40px;
+        }
 
-.form {
-	padding: 30px 40px;	
-	font-weight: 500;
-	color: #03153b;
-}
+        .header h2 {
+            margin: 0;
+            color: #212C42;
+        }
 
-.form-control {
-	margin-bottom: 10px;
-	padding-bottom: 20px;
-	position: relative;
-}
+        .form {
+            padding: 30px 40px;
+            font-weight: 500;
+            color: #03153b;
+        }
 
-.form-control label {
-	display: inline-block;
-	margin-bottom: 5px;
-}
+        .form-control {
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            position: relative;
+        }
 
-.form-control input {
-	border: 2px solid #f0f0f0;
-	border-radius: 4px;
-	display: block;
-	font-family: inherit;
-	font-size: 14px;
-	padding: 10px;
-	width: 100%;
-}
+        .form-control label {
+            display: inline-block;
+            margin-bottom: 5px;
+        }
 
-.form-control input:focus {
-	outline: 0;
-	border-color: #777;
-}
+        .form-control input {
+            border: 2px solid #f0f0f0;
+            border-radius: 4px;
+            display: block;
+            font-family: inherit;
+            font-size: 14px;
+            padding: 10px;
+            width: 100%;
+        }
 
-.form-control.success input {
-	border-color: #2ecc71;
-}
+        .form-control input:focus {
+            outline: 0;
+            border-color: #777;
+        }
 
-.form-control.error input {
-	border-color: #e74c3c;
-}
+        .form-control.success input {
+            border-color: #2ecc71;
+        }
 
-.form-control i {
-	visibility: hidden;
-	position: absolute;
-	top: 40px;
-	right: 10px;
-}
+        .form-control.error input {
+            border-color: #e74c3c;
+        }
 
-.form-control.success i.fa-check-circle {
-	color: #2ecc71;
-	visibility: visible;
-}
+        .form-control i {
+            visibility: hidden;
+            position: absolute;
+            top: 40px;
+            right: 10px;
+        }
 
-.form-control.error i.fa-exclamation-circle {
-	color: #e74c3c;
-	visibility: visible;
-}
+        .form-control.success i.fa-check-circle {
+            color: #2ecc71;
+            visibility: visible;
+        }
 
-.form-control small {
-	color: #e74c3c;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	visibility: hidden;
-}
+        .form-control.error i.fa-exclamation-circle {
+            color: #e74c3c;
+            visibility: visible;
+        }
 
-.form-control.error small {
-	visibility: visible;
-}
+        .form-control small {
+            color: #e74c3c;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            visibility: hidden;
+        }
 
-.form button {
-	background-color: #6781F7;
-	border: 2px solid #6781F7;
-	border-radius: 4px;
-	color: #fff;
-	display: block;
-	font-family: inherit;
-	font-size: 16px;
-	padding: 10px;
-	margin-top: 20px;
-	width: 100%;
-	cursor: pointer;
-	transition: 0.6s;
-}
+        .form-control.error small {
+            visibility: visible;
+        }
 
-.form button:hover {
-	transform: scale(0.95);
-	opacity: .8;
-}
+        .form button {
+            background-color: #6781F7;
+            border: 2px solid #6781F7;
+            border-radius: 4px;
+            color: #fff;
+            display: block;
+            font-family: inherit;
+            font-size: 16px;
+            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.6s;
+        }
 
-input::placeholder {
-	color: #1d346565;
-}
+        .form button:hover {
+            transform: scale(0.95);
+            opacity: .8;
+        }
+
+        input::placeholder {
+            color: #1d346565;
+        }
 
 
 
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  color: blue;
-  border: 1px solid blue;
-  outline: none;
-}
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            color: blue;
+            border: 1px solid blue;
+            outline: none;
+        }
 
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  color: white;
-  background-color: blue;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            color: white;
+            background-color: blue;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
 
-button:hover {
-  background-color: darkblue;
-}
-</style>
+        button:hover {
+            background-color: darkblue;
+        }
+
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: darkblue;
+        }
+    </style>
 
 
 </head>
+
 <body>
 
     <div class="container">
-    
-            <div class="header">
-                <h2>Agregar Producto</h2>
-            </div>
-    
-    
+        <div>
+            <a class="nav-link return-button" href="/logout">Salir.</a>
+        </div>
+
+        <div class="header">
+            <h2>Agregar Producto</h2>
+        </div>
+
+
         <form action="/aggprd" method="post" class="form">
             <div class="form-control">
-                <input  type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del producto" required maxlength="25" minlength="3"/>
+                <input type="text" name="nombre" id="nombre" placeholder="Ingrese el nombre del producto" required
+                    maxlength="25" minlength="3" />
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
             <div class="form-control">
-                <input type="number" name="codigo" id="codigo" placeholder="Ingrese el codigo del producto" required/>
+                <input type="number" name="codigo" id="codigo" placeholder="Ingrese el codigo del producto" required />
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
             <div class="form-control">
-                <input input type="number" name="precio" id="precio" placeholder="Ingrese el precio del producto" required/>
+                <input input type="number" name="precio" id="precio" placeholder="Ingrese el precio del producto"
+                    required />
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
             <div class="form-control">
-                <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del producto" required/>
+                <input type="text" name="marca" id="marca" placeholder="Ingrese la marca del producto" required />
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
             <div class="form-control">
-                <input type="number" name="jugadores" id="jugadores" placeholder="Ingrese para cuantos jugadores es el producto" required/>
+                <input type="number" name="jugadores" id="jugadores"
+                    placeholder="Ingrese para cuantos jugadores es el producto" required />
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
             <select name="categoria_id" id="categoria_id">
-                <option value="" >--Seleccione--</option>
+                <option value="">--Seleccione--</option>
                 <% if (categorias) { %>
-                    <% for (let i = 0; i < categorias.length; i++){  %>
+                    <% for (let i=0; i < categorias.length; i++){ %>
                         <% if (categorias) { %>
-                            <option value="<%= categorias[i].id %>" id="categoria_id" name="categoria_id"><%= categorias[i].nombre %></option>
-    
-                        <% } %>
-                    <% } %>
-                <% } else { %>
-                            <option value="">No existen categorias en el sistema</option>
-                    <% }   %>
+                            <option value="<%= categorias[i].id %>" id="categoria_id" name="categoria_id">
+                                <%= categorias[i].nombre %>
+                            </option>
+
+                            <% } %>
+                                <% } %>
+                                    <% } else { %>
+                                        <option value="">No existen categorias en el sistema</option>
+                                        <% } %>
             </select>
-        <input type="textarea" name="descripcion" id="descripcion" placeholder="Ingrese la descripcion del producto" maxlength="60" minlength="10">
+            <input type="textarea" name="descripcion" id="descripcion" placeholder="Ingrese la descripcion del producto"
+                maxlength="60" minlength="10">
             <button type="submit" class="btn btn-primary">Subir Producto</button>
         </form>
     </div>
-    
-    </body>
-    </html>
-    
+
+</body>
+
+</html>

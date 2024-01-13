@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mark's Quest</title>
+
     <link rel="stylesheet" href="/stylesheets/admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/hf.css">
+
+    <!-- 
+    - favicon
+  -->
+    <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
+    <!-- 
+    - google font link
+  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
+        rel="stylesheet">
+
+
 
     <style>
 
@@ -29,14 +47,10 @@
 }
 
 
-        body{
-            background-color: #1ca39e;
+body {
+            background-color: #161737;
         }
         
-        h1 {
-            color: white;
-        }
-
 
 ul {
   list-style-type: none;
@@ -61,13 +75,12 @@ div.lista{
 border: 1px solid #ccc;
 }
 
-.lista> p{
-    img{
+.lista p img{
     width: 300px;
     height: 300px;
     object-fit: cover;
 }
-}
+
 
 div.cuadricula {
     box-shadow: 0 4px 8px #24262b, 0 6px 20px rgba(0,0,0,0,19);
@@ -87,13 +100,12 @@ div.cuadricula {
     border: 1px solid #ccc;
 }
 
-.cuadricula> p{
-    img{
+.cuadricula p img{
     width: 100px;
     height: 100px;
     object-fit: cover;
 }
-}
+
 
 div.producto{
     text-align: center;
@@ -111,22 +123,38 @@ div.producto{
     gap: 16px;
 }
 
+.return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: darkblue;
+        }
 
 </style>
 
 
 </head>
-<header>
+<body>
+    <div class="color">
+        <header>
+            <div class="container1">
 
+                <h1 class="h1 logo">
+                    <a href="/report">Mark's Quest<span>.</span></a>
+                </h1>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-
-        <div>
-            <h1>Mark's Quest</h1>
-        </div>
-
-
         <div class="container-fluid">
-            <a class="navbar-brand" href="/clientes"><strong>Pagina Reporte</strong></a>
+            <a class="navbar-brand nav-link btn btn-dark" href="/clientes"><strong>Home</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -147,11 +175,12 @@ div.producto{
             </div>
         </div>
     </nav>
+            </div>
     </header>
+    </div>
 
-<body>
-
-    <div >
+    <main class="separe">
+        <article class="container1">
         <div class="producto lista">
                 <p><img src="<%= datos.url %>"></p>
                 <p class="texto" style="font-weight: bolder;"><%= datos.productoNombre %></p>
@@ -162,8 +191,46 @@ div.producto{
                 <p class="texto">Precio: <%= datos.precio %>$</p>
                 <p class="texto"><a href="/pedidoprd/<%= datos.id%>" class="btn btn-success">Comprar</a></p>
         </div>
-    </div>
-        
+    </article>
+</main>
+<!-- 
+- #FOOTER
+-->
 
+<footer class="footer">
+    <div class="container1">
+
+        <p class="h1 logo">
+            <a href="#">
+                Mark's Quest<span>.</span>
+            </a>
+        </p>
+
+        <p class="copyright">
+            &copy; 2024 <a href="#">M&C</a>. All rights reserved
+        </p>
+
+    </div>
+</footer>
+
+
+
+
+
+<!-- 
+- ionicon link
+-->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>

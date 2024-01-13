@@ -4,67 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Categoria</title>
+	    <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f1f1f1;
-        }
+		@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap');
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	body {
+		background-color: #8eaeeb;
+		font-family: 'Open Sans', sans-serif;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100vh;
+		margin: 0;
+	}
+	
+	.container {
+		background-color: #fff;
+		border-radius: 5px;
+		box-shadow: 0 2px 20px 0px #03153b2e;
+		overflow: hidden;
+		width: 400px;
+		max-width: 100%;
+	}
+	
+	.header {
+		border-bottom: 1px solid #f0f0f0;
+		background-color: #ccd8ef;
+		padding: 20px 40px;
+	}
+	
+	.header h2 {
+		margin: 0;
+		color: #212C42;
+	}
+	
+	.form {
+		padding: 30px 40px;	
+		font-weight: 500;
+		color: #03153b;
+	}
+	
+	.form-control {
+		margin-bottom: 10px;
+		padding-bottom: 20px;
+		position: relative;
+	}
+	
+	.form-control label {
+		display: inline-block;
+		margin-bottom: 5px;
+	}
+	
+	.form-control input {
+		border: 2px solid #f0f0f0;
+		border-radius: 4px;
+		display: block;
+		font-family: inherit;
+		font-size: 14px;
+		padding: 10px;
+		width: 100%;
+	}
+	
+	.form-control input:focus {
+		outline: 0;
+		border-color: #777;
+	}
+	
+	.form-control.success input {
+		border-color: #2ecc71;
+	}
+	
+	.form-control.error input {
+		border-color: #e74c3c;
+	}
+	
+	.form-control i {
+		visibility: hidden;
+		position: absolute;
+		top: 40px;
+		right: 10px;
+	}
+	
+	.form-control.success i.fa-check-circle {
+		color: #2ecc71;
+		visibility: visible;
+	}
+	
+	.form-control.error i.fa-exclamation-circle {
+		color: #e74c3c;
+		visibility: visible;
+	}
+	
+	.form-control small {
+		color: #e74c3c;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		visibility: hidden;
+	}
+	
+	.form-control.error small {
+		visibility: visible;
+	}
+	
+	.form button {
+		background-color: #6781F7;
+		border: 2px solid #6781F7;
+		border-radius: 4px;
+		color: #fff;
+		display: block;
+		font-family: inherit;
+		font-size: 16px;
+		padding: 10px;
+		margin-top: 20px;
+		width: 100%;
+		cursor: pointer;
+		transition: 0.6s;
+	}
+	
+	.form button:hover {
+		transform: scale(0.95);
+		opacity: .8;
+	}
+	
+	input::placeholder {
+		color: #1d346565;
+	}
+	
+	
+	
+	
+	form {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	}
+	
+	select {
+	  width: 100%;
+	  padding: 10px;
+	  margin-bottom: 10px;
+	  color:blue;
+	  border: 1px solid blue;
+	  outline: none;
+	}
+	
+	button {
+				padding: 10px 20px;
+				background-color:blue;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				outline: none;
+				cursor: pointer;
+			}
+	
+			button:hover {
+				background-color: darkblue;
+			}
 
-        .container {
-            max-width: 400px;
-            padding: 20px;
-            background-color: white;
-            border: 2px solid blue;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        h3 {
-            margin-top: 0;
-            font-size: 24px;
-            color: blue;
-            font-weight: bold;
-        }
-
-        h4 {
-            border: 2px solid blue;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        input[type="text"] {
-            padding: 10px;
-            width: 100%;
-            box-sizing: border-box;
-            border: 2px solid blue;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        button {
+			.return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
             padding: 10px 20px;
-            background-color: blue;
+            background-color: blue ;
             color: white;
             border: none;
-            border-radius: 5px;
-            outline: none;
+            border-radius: 4px;
+            font-size: 16px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: darkblue;
+        .return-button:hover {
+            background-color: darkblue ;
         }
-    </style>
+	</style>
 </head>
 <body>
     <div  class="container">
+
+        <div>
+            <a class="nav-link return-button" href="/logout">Salir.</a>
+        </div>
+        <div class="header">
+			<h2>Actualizar Categoria</h2>
+		</div>
+        <hr>
+
         <form action="/updatectg/<%= categorias.id %>" method="post">
-            <input type="text" name="nombre" id="nombre" value="<%= categorias.nombre %>" required maxlength="25" minlength="4">
-            <button type="submit" class="btn btn-primary">Actualizar Categoria</button>
+            <div style="margin-top: 20px; margin-bottom: 20px;"><input type="text" name="nombre" id="nombre" value="<%= categorias.nombre %>" required maxlength="25" minlength="4"></div>
+            <div style="margin-top: 20px; margin-bottom: 20px;"><button type="submit" class="btn btn-primary">Actualizar Categoria</button></div>
         </form>
     </div>
 </body>
