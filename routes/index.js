@@ -142,7 +142,7 @@ router.get('/pedidoprd/:id', function(req, res, next){
 router.post('/payments', async (req, res, next)=>{
   var monto, moneda;
   const {producto_id, descripcion, nombre, numero_tarjeta, cvv, mes_ven, year_ven, moneda_id, cantidad, referencia, precio} = req.body;
-  const ip_cliente = req.socket.remoteAddress;
+  const ip_cliente = req.ip || req.socket.remoteAddress;
   const cliente_id = req.session.username;
   if (moneda_id == 1) {
     moneda= 'USD';
