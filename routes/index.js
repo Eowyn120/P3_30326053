@@ -2,11 +2,18 @@ require ('dotenv').config();
 var express = require('express');
 var router = express.Router();
 var axios = require ('axios');
-
+var nodemailer = require ('nodemailer');
 
 const productosModel = require ('../models/admin');
 const { Axios } = require('axios');
 
+//Tranporte correo
+const transporter = nodemailer.createTransport({ 
+  service: 'gmail', 
+  auth: { 
+    user: process.env.correo, 
+    pass: process.env.clave_correo
+  } });
 
 
 //Pagina principal
@@ -33,6 +40,7 @@ router.post('/login2', function(req, res, next){
     concat2 = datos[0].id
     console.log(concat2);
     if (password == concat){
+      req.session.email = email;
       req.session.auth = true;
       req.session.username = concat2;
       res.redirect('/clientes');
@@ -60,6 +68,22 @@ router.post('/register', function(req, res, next){
   productosModel
     .registroclientes(email, password1, preg_seg, resp_seg)
     .then(idClienteRegistrado=>{
+      const mailOptions = { 
+        from: 'MarksQuestSupport@gmail.com', 
+        to: email, 
+        subject: `Bienvenido a Mark's Quest!!!`, 
+        text: `Hola!!\n 
+        ¡Te damos la bienvenida a Mark's Quest!\n
+        Tu registro ha sido completado de manera exitosa.\n\n
+        Esperamos que tengas una experiencia maravillosa en nuestra plataforma, y que logres encontrar todo lo que necesitas.\n\n 
+        Mark's Quest ©2024 M&C. All rights reserved` 
+      };
+
+        transporter.sendMail(mailOptions, function(error, info){ 
+          if (error) { console.log(error); 
+          } else { 
+            console.log('Correo electrónico de Bienvenida enviado: ' + info.response); 
+          }});
       res.redirect('/loginclientes')
     })
     .catch(err=>{
@@ -85,7 +109,22 @@ router.post('/resclave', function(req, res, next){
   productosModel
     .recuperarclave(pregunta, respuesta)
     .then(datos=>{
-      res.render('claverec', {datos: datos});
+      const mailOptions = { 
+        from: `MarksQuestSupport@gmail.com`, 
+        to: datos[0].email, 
+        subject: `Restablecer Contraseña`, 
+        text: `Hola, has solicitado restablecer tu contraseña.\n
+        Haz clic en el siguiente enlace para continuar: ${process.env.base_url}/rest-clave/${datos[0].id}\n\n
+        Si no ha sido usted el que ha hecho la petición solo ignore el correo.\n\n 
+        Mark's Quest ©2024 M&C. All rights reserved` 
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){ 
+        if (error) { console.log(error); 
+        } else { 
+          console.log('Correo electrónico de recuperacion de contraseña enviado: ' + info.response); 
+      }});
+      res.send('Dirigase al correo para recuperar su contraseña')
     })
     .catch(err=>{
       console.error(err.message);
@@ -93,9 +132,47 @@ router.post('/resclave', function(req, res, next){
     })
 });
 
+//Pagina restablecer contraseña
+router.get('/rest-clave/:id', function(req, res, next){
+  if (req.session.auth){
+    res.redirect('/clientes');
+  }else{
+    const id= req.params.id;
+    productosModel
+    .obtenerIdcliente(id)
+    .then(datos=>{
+      res.render('claverec', {datos: datos})
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('No se encuentra ese cliente')
+    })
+  }
+});
+
+//Restablecer Contraseña
+router.post('/updateclave/:id', function(req, res, next){
+  const cliente_id= req.params.id;
+  console.log(cliente_id);
+  const {password1, password2} = req.body;
+  if (password1 != password2){
+    res.redirect('/passwordfail')
+  } else{
+    productosModel
+    .restablecerclave(cliente_id, password1)
+    .then(()=>{
+      res.send('Contraseña recuperada de manera exitosa');
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error restableciendo contraseña')
+    })
+  }
+});
+
 //Pagina principal compras
 router.get('/clientes', function(req, res, next){
-  productosModel
+    productosModel
     .obteneradmin()
     .then(datos=>{
       res.render('clientes', {datos: datos});
@@ -142,8 +219,9 @@ router.get('/pedidoprd/:id', function(req, res, next){
 router.post('/payments', async (req, res, next)=>{
   var monto, moneda;
   const {producto_id, descripcion, nombre, numero_tarjeta, cvv, mes_ven, year_ven, moneda_id, cantidad, referencia, precio} = req.body;
-  const ip_cliente = req.socket.remoteAddress;
+  const ip_cliente = req.ip || req.socket.remoteAddress;
   const cliente_id = req.session.username;
+  const email = req.session.email;
   if (moneda_id == 1) {
     moneda= 'USD';
     monto = cantidad * precio;
@@ -182,12 +260,97 @@ router.post('/payments', async (req, res, next)=>{
       productosModel
       .facturas(cantidad, total_pagado, fecha, ip_cliente, transaccion_id, descripcion, referencia, moneda_id, cliente_id, producto_id)
       .then(idFacturaRealizada =>{
+        const mailOptions = { 
+          from: `MarksQuestSupport@gmail.com`, 
+          to: email, 
+          subject: `¡Compra realizada de forma exitosa!`, 
+          text: `¡Hola, ${nombre}!\n\n 
+          ¡Gracias por realizar tu compra en Mark's Quest! Aqui la puedes ver al detalle:\n\n
+          N° Transicción: ${transaccion_id}\n
+          Producto: ${descripcion}\n
+          Cantidad: ${cantidad}\n
+          Total Pagado: ${total_pagado}${moneda}\n\n
+          ¡Gracias por elegirnos!. Si no ha sido usted el que ha realizado la compra, contactenos a la mayor brevedad posible!\n\n 
+          Mark's Quest ©2024 M&C. All rights reserved` 
+        };
+
+          transporter.sendMail(mailOptions, function(error, info){ 
+            if (error) { console.log(error); 
+            } else { 
+              console.log('Correo electrónico de compra enviado: ' + info.response); 
+            }});
         res.render('pagosuccess', {title: 'Compra Exitosa'})
       })
   } catch (err) {
     res.render('pagofails');
   }
+});
+
+//Pagina de Productos comprados por Cliente para su calificacion
+router.get('/productos-comprados', function(req, res, next){
+  if (req.session.auth) {
+    const cliente_id = req.session.username;
+    console.log(cliente_id);
+    productosModel
+    .obtenercomprasPorCliente(cliente_id)
+    .then(datos=>{
+      res.render('prdcomprados', {datos: datos});
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error buscando archivos')
+    })
+  } else{
+    res.redirect('/loginclientes');
+  }
 })
+
+//Pagina para calificar un producto
+router.get('/calificar/:id', function(req, res, next){
+  if (req.session.auth){
+    const id = req.params.id;
+    productosModel
+    .obtenerprdconimgPorId(id)
+    .then(producto=>{
+      res.render('calificaciones', {producto:producto})
+    })
+    .catch(err=>{
+      console.error(err.message);
+      return res.status(500).send('Error buscando productos')
+    })
+  }else{
+    res.redirect('/loginclientes');
+  }
+});
+
+//Califar producto
+router.post('/calificacion', function(req, res, next){
+  const {producto_id, puntos}= req.body;
+  const cliente_id = req.session.username;
+  productosModel
+  .calificarprd(puntos, cliente_id, producto_id)
+  .then(idProductoCalificado=>{
+    res.render('calificacionsuccess');
+  })
+  .catch(err=>{
+    console.error(err.message);
+    return res.status(500).send('Error calificando productos')
+  })
+});
+
+//Filtrado por promedio de calificacion
+router.post('/filtroprm', function(req, res, next){
+  const {promedio} = req.body;
+  productosModel
+  .filtradoprm(promedio)
+  .then(datos=>{
+    res.render('clientes', {datos: datos});
+  })
+  .catch(err=>{
+    console.error(err.message);
+    return res.status(500).send('Error buscando archivos')
+  })
+});
 
 //Busqueda nombre productos
 router.post('/search', function(req, res, next){
@@ -264,7 +427,7 @@ router.post('/filtrojgd', function(req, res, next){
 
 // Pagina inicio de sesion administrador
 router.get('/admin', function(req, res, next) {
-  if (req.session.auth){
+  if (req.session.admin){
     res.redirect('/report');
   } else{
   res.render('login_admin', { title: 'Login Admin' });}
@@ -274,7 +437,7 @@ router.get('/admin', function(req, res, next) {
 router.post('/login', function(req, res, next){
   const {user, password} = req.body;
   if ((process.env.USER == user) && (process.env.PASSWORD == password)) {
-    req.session.auth = true;
+    req.session.admin = true;
     res.redirect('/report');
   } else{
     res.render('loginfail', {title: 'Login Fail'});
@@ -283,7 +446,7 @@ router.post('/login', function(req, res, next){
 
 //Get principal page
 router.get('/report', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obteneradmin()
     .then(datos=>{
@@ -301,7 +464,7 @@ router.get('/report', function(req, res, next){
 
 //Get productos page
 router.get('/productos', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obtenerprd()
     .then(productos =>{
@@ -317,7 +480,7 @@ router.get('/productos', function(req, res, next){
 
 //Get categorias page
 router.get('/categorias', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
   .obtenerctg()
   .then(categorias =>{
@@ -333,7 +496,7 @@ router.get('/categorias', function(req, res, next){
 
 //Get imagenes page
 router.get('/imagenes', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obtenerimg()
     .then(imagenes =>{
@@ -349,7 +512,7 @@ router.get('/imagenes', function(req, res, next){
 
 //Get productos page agg
 router.get('/prdagg', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obtenerctg()
     .then(categorias=>{
@@ -365,7 +528,7 @@ router.get('/prdagg', function(req, res, next){
 
 //Get categorias page agg
 router.get('/ctgagg', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     res.render('aggctg');
   } else{
     res.redirect('/admin');
@@ -374,7 +537,7 @@ router.get('/ctgagg', function(req, res, next){
 
 //Get imagenes page agg
 router.get('/imgagg', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
   .obtenerprd()
   .then(productos=>{
@@ -433,7 +596,7 @@ router.post('/aggimg', function(req, res, next){
 
 //Get productos page edit
 router.get('/prdedit/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
     productosModel
       .obtenerprdPorId(id)
@@ -451,7 +614,7 @@ router.get('/prdedit/:id', function(req,res,next){
 
 //Get categorias page edit
 router.get('/ctgedit/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
     productosModel
     .obtenerctgPorId(id)
@@ -469,7 +632,7 @@ router.get('/ctgedit/:id', function(req,res,next){
 
 //Get imagenes page edit
 router.get('/imgedit/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
     productosModel
     .obtenerimgPorId(id)
@@ -532,7 +695,7 @@ router.post('/updateimg/:id', function(req, res, next){
 
 //Get productos page delete
 router.get('/prddelete/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
     productosModel
     .obtenerprdPorId(id)
@@ -550,7 +713,7 @@ router.get('/prddelete/:id', function(req,res,next){
 
 //Get categorias page delete
 router.get('/ctgdelete/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
     productosModel
     .obtenerctgPorId(id)
@@ -568,7 +731,7 @@ router.get('/ctgdelete/:id', function(req,res,next){
 
 //Get imagenes page delete
 router.get('/imgdelete/:id', function(req,res,next){
-  if (req.session.auth){
+  if (req.session.admin){
     const id=req.params.id;
   productosModel
   .obtenerimgPorId(id)
@@ -628,7 +791,7 @@ router.get('/deleteimg/:id', function(req,res,next){
 
 //Vista tabla de compras
 router.get('/tablacompras', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obtenerfacturas()
     .then(facturas=>{
@@ -645,7 +808,7 @@ router.get('/tablacompras', function(req, res, next){
 
 //Vista tabla de clientes
 router.get('/tablaclientes', function(req, res, next){
-  if (req.session.auth){
+  if (req.session.admin){
     productosModel
     .obtenerclientes()
     .then(clientes=>{

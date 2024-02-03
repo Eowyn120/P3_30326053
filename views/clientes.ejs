@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mark's Quest">
+    <meta property="og:url" content="https://p3-30326053.onrender.com/">
+    <meta property="og:image" content="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg">
     <title>Mark's Quest</title>
 
     <link rel="stylesheet" href="/stylesheets/admin.css">
@@ -14,6 +18,8 @@
     - favicon
   -->
     <link rel="shortcut icon" href="https://i.pinimg.com/236x/a6/17/7e/a6177eb9992ea3a348dbb5c022160ffa.jpg" type="">
+
+    <!-- Schema Markup-->
 
     <!-- 
     - google font link
@@ -151,7 +157,7 @@
             <div class="container1">
 
                 <h1 class="h1 logo">
-                    <a href="/report">Mark's Quest<span>.</span></a>
+                    <a href="/clientes">Mark's Quest<span>.</span></a>
                 </h1>
                     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
 
@@ -257,9 +263,26 @@
                                             </form>
                                         </li>
                                     </div>
+                                    <div>
+                                        <li class="nav-item">
+                                            <form action="/filtroprm" method="post">
+                                                <select name="promedio" id="promedio">
+                                                    <option value="">--Calificacion--</option>
+                                                        <% for (let i=0; i < 6; i++){ %>
+                                                            <option value="<%= i %>"
+                                                            name="promedio" id="promedio">
+                                                            <%= i %>
+                                                            </option>
+                                                        <% } %>
+                                                </select>
+                                                <button type="submit" class="btn btn-dark">Filtrar productos</button>
+                                            </form>
+                                        </li>
+                                    </div>
                             </div>
                             
                                 <li class="nav-item">
+                                    <a class="nav-link btn btn-dark" href="/productos-comprados">Productos Comprados</a>
                                     <a class="nav-link btn btn-dark" href="/loginclientes">Iniciar Sesion</a>
                                     <a class="nav-link btn btn-dark" href="/logout">Salir.</a>
                                 </li>
@@ -296,6 +319,7 @@
                                                 <%= datos[i].productoNombre %>
                                             </p>
                                             <p class="texto">Precio: <%= datos[i].precio %>$</p>
+                                            <p class="texto"><%= datos[i].promedio %> Estrellas</p>
                                             <p class="texto"><a href="detalles/<%= datos[i].id %>"
                                                     class="btn btn-success">Detalles</a>
                                             </p>

@@ -89,7 +89,7 @@
                                     <a class="nav-link btn btn-dark" href="/tablacompras">Facturas</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link return-button" href="./">Salir.</a>
+                                    <a class="nav-link return-button" href="/logout">Salir.</a>
                                 </li>
                             </ul>
 
@@ -138,6 +138,9 @@
                             <th>
                                 <p>Destacado</p>
                             </th>
+                            <th>
+                                <p>Calificacion</p>
+                            </th>
                         </tr>
                         <tr>
                             <% if (datos) { %>
@@ -170,6 +173,13 @@
                             <td><img class="imagen-producto" src="<%= datos[i].url %>"></td>
                             <td>
                                 <%= datos[i].destacado %>
+                            </td>
+                            <td>
+                                <% if (datos[i].promedio > 0) {%>
+                                    <%= datos[i].promedio %>
+                                <% } else{%>
+                                    <p>Sin Calificar</p>
+                                <% }%>
                             </td>
                         </tr>
                         <% } %>

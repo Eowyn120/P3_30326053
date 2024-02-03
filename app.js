@@ -8,6 +8,7 @@ var session = require('express-session');
 var request = require ('request');
 var requestIP= require ('request-ip');
 var axios = require ('axios');
+var nodemailer = require ('nodemailer');
 
 console.log(process.env.USER);
 console.log(process.env.PASSWORD);
