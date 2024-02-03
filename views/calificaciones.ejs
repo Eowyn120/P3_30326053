@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar Producto</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #161737;
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid blue;
+            border-radius: 5px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        h4,
+        h3, h2 {
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        img {
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .return-button:hover {
+            background-color: darkblue;
+        }
+
+        .adjust {
+            max-width: 90%;
+            height: 90%;
+            overflow: auto;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="adjust">
+        <div class="container">
+            <div>
+                <a class="nav-link return-button" href="/clientes">Salir.</a>
+            </div>
+
+            <div class="header">
+                <h2>Calificacion del Producto</h2>
+                <hr>
+            </div>
+            <img src="<%= producto.url %>" class="imagen-producto">
+            <form action="/calificacion" method="post">
+                <hr><h4 for="nombre">Calificacion del Producto:</h4>
+                <input type="text" name="nombre" id="nombre" value=" <%= producto.nombre %>" readonly>
+                <h5>Identificación:</h5><input type="text" name="producto_id" id="producto_id" value="<%= producto.id %>" readonly>
+                <hr> <h4 for="Calificar">¿Que tan sactifactorio ha sido el Uso del Producto?</h4>
+                <input type="range" name="puntos" id="puntos" value="5" min="1" max="5" onInput="this.nextElementSibling.value = this.value">
+                <output>5</output>                
+                <div style="margin-top: 10px; margin-bottom: 10px;"><button type="submit" class="btn btn-primary">Calificar</button></div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

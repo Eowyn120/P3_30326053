@@ -8,6 +8,7 @@ var session = require('express-session');
 var request = require ('request');
 var requestIP= require ('request-ip');
 var axios = require ('axios');
+var nodemailer = require ('nodemailer');
 
 console.log(process.env.USER);
 console.log(process.env.PASSWORD);
@@ -34,7 +35,6 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.set('trust proxy', true);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
