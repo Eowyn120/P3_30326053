@@ -81,7 +81,7 @@
     <div class="adjust">
         <div class="container">
             <div>
-                <a class="nav-link return-button" href="/clientes">Salir.</a>
+                <a class="nav-link return-button" href="/logout">Salir.</a>
             </div>
 
             <div class="header">
@@ -93,7 +93,7 @@
                 <hr><h4 for="descripcion">Tipo de transacción</h4>
                 <h5>Compra de:</h5><input type="text" name="descripcion" id="descripcion" value=" <%= datos.productoNombre %>"
                     readonly>
-                    <h5>Identificación:</h5><input type="text" name="producto_id" id="producto_id" value="<%= datos.id %>" readonly>
+                    <h5>Id:</h5><input type="text" name="producto_id" id="producto_id" value="<%= datos.id %>" readonly>
                 <hr> <h4 for="nombre">Nombre del comprador</h4>
                 <input type="text" name="nombre" id="nombre" placeholder="Ingrese su nombre completo" required>
                 <hr><h4 for="numero_tarjeta">Número de Tarjeta de Credito</h4>
@@ -103,7 +103,7 @@
                 <input type="password" name="cvv" id="cvv"
                     placeholder="Ingrese el codigo de seguridad de la tarjeta de credito" maxlength="3" required><br>
                     <hr><h4 for="referencia">Haga una referencia</h4>
-                    <input type="text" name="referencia" id="referencia" value="Marca: <%= datos.marca %>" readonly>
+                    <h5>Marca:</h5><input type="text" name="referencia" id="referencia" value=" <%= datos.marca %>" readonly>
                 <hr><h4 for="mes_ven">Mes de Vencimiento de la tarjeta</h4>
                 <select name="mes_ven" id="mes_ven">
                     <option value="1">Enero</option>
