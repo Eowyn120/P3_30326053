@@ -113,7 +113,7 @@ router.post('/resclave', function(req, res, next){
         from: `MarksQuestSupport@gmail.com`, 
         to: datos[0].email, 
         subject: `Restablecer Contraseña`, 
-        text: `Hola, has solicitado restablecer tu contraseña.\n
+        text: `Hola, haz solicitado restablecer tu contraseña.\n
         Haz clic en el siguiente enlace para continuar: ${process.env.base_url}/rest-clave/${datos[0].id}\n\n
         Si no ha sido usted el que ha hecho la petición solo ignore el correo.\n\n 
         Mark's Quest ©2024 M&C. All rights reserved` 
